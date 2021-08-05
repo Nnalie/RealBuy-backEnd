@@ -1,28 +1,29 @@
 package com.leonardoelian.ecommerceAPI.resources;
 
 import com.leonardoelian.ecommerceAPI.domain.Categoria;
+import com.leonardoelian.ecommerceAPI.services.CategoriaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/categorias")
 public class CategoriaResource {
 
-    @GetMapping
-    public List<Categoria> listar() {
+    @Autowired
+    private CategoriaService catServ;
 
-        Categoria cat1 = new Categoria(1, "informática");
-        Categoria cat2 = new Categoria(2, "Escritório");
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> findById(@PathVariable Integer id) {
 
-        List<Categoria> listCat = new ArrayList<>();
-        listCat.add(cat1);
-        listCat.add(cat2);
+        Optional<Categoria> obj = catServ.buscarPorId(id);
 
-        return listCat;
+        return ResponseEntity.ok().body(obj);
     }
 
 }
