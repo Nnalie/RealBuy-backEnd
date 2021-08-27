@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/categorias")
@@ -30,7 +29,7 @@ public class CategoriaResource {
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id) {
 
-        Optional<Categoria> obj = catServ.buscarPorId(id);
+        Categoria obj = catServ.buscarPorId(id);
 
         return ResponseEntity.ok().body(obj);
     }

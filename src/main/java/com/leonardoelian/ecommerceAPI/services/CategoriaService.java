@@ -2,6 +2,7 @@ package com.leonardoelian.ecommerceAPI.services;
 
 import com.leonardoelian.ecommerceAPI.domain.Categoria;
 import com.leonardoelian.ecommerceAPI.repositories.CategoriaRepository;
+import com.leonardoelian.ecommerceAPI.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +20,10 @@ public class CategoriaService {
         return obj;
     }
 
-    public Optional<Categoria> buscarPorId(Integer id) {
+    public Categoria buscarPorId(Integer id) {
         Optional<Categoria> obj = catRepo.findById(id);
-        return obj;
+        return obj.orElseThrow(() -> new ObjectNotFoundException(
+                "Categoria não encontrada! Id: " + id + ", Tipo: " + Categoria.class.getName()));
     }
 
 }
