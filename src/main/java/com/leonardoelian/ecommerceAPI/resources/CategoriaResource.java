@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -17,6 +18,14 @@ public class CategoriaResource {
 
     @Autowired
     private CategoriaService catServ;
+
+    @GetMapping
+    public ResponseEntity<?> findAll() {
+
+        List<Categoria> obj = catServ.buscarTodos();
+
+        return ResponseEntity.ok().body(obj);
+    }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id) {
