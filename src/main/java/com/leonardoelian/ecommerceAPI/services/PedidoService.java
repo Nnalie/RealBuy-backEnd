@@ -15,12 +15,12 @@ public class PedidoService {
     @Autowired
     private PedidoRepository repo;
 
-    public List<Pedido> buscarTodos() {
+    public List<Pedido> findAll() {
         List<Pedido> obj = repo.findAll();
         return obj;
     }
 
-    public Pedido buscarPorId(Integer id) {
+    public Pedido findById(Integer id) {
         Optional<Pedido> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
                 "Categoria não encontrada! Id: " + id + ", Tipo: " + Pedido.class.getName()));

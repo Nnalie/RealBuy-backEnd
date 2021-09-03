@@ -17,12 +17,12 @@ public class ClienteService {
     @Autowired
     private ClienteRepository cliRepo;
 
-    public List<Cliente> buscarTodos() {
+    public List<Cliente> findAll() {
         List<Cliente> obj = cliRepo.findAll();
         return obj;
     }
 
-    public Cliente buscarPorId(Integer id) {
+    public Cliente findById(Integer id) {
         Optional<Cliente> obj = cliRepo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
                 "Categoria não encontrada! Id: " + id + ", Tipo: " + Cliente.class.getName()));

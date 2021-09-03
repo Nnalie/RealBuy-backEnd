@@ -21,7 +21,7 @@ public class ClienteResource {
     @GetMapping
     public ResponseEntity<?> findAll() {
 
-        List<Cliente> obj = cliServ.buscarTodos();
+        List<Cliente> obj = cliServ.findAll();
 
         return ResponseEntity.ok().body(obj);
     }
@@ -29,7 +29,7 @@ public class ClienteResource {
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id) {
 
-        Cliente obj = cliServ.buscarPorId(id);
+        Cliente obj = cliServ.findById(id);
 
         return ResponseEntity.ok().body(obj);
     }

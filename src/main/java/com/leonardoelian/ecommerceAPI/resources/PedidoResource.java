@@ -21,15 +21,15 @@ public class PedidoResource {
     @GetMapping
     public ResponseEntity<?> findAll() {
 
-        List<Pedido> obj = pedServ.buscarTodos();
+        List<Pedido> obj = pedServ.findAll();
 
         return ResponseEntity.ok().body(obj);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<?> findById(@PathVariable Integer id) {
+    public ResponseEntity<Pedido> findById(@PathVariable Integer id) {
 
-        Pedido obj = pedServ.buscarPorId(id);
+        Pedido obj = pedServ.findById(id);
 
         return ResponseEntity.ok().body(obj);
     }
