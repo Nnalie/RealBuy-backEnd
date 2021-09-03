@@ -13,17 +13,21 @@ import java.util.Optional;
 public class CategoriaService {
 
     @Autowired
-    private CategoriaRepository catRepo;
+    private CategoriaRepository repo;
 
     public List<Categoria> buscarTodos() {
-        List<Categoria> obj = catRepo.findAll();
+        List<Categoria> obj = repo.findAll();
         return obj;
     }
 
     public Categoria buscarPorId(Integer id) {
-        Optional<Categoria> obj = catRepo.findById(id);
+        Optional<Categoria> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
                 "Categoria não encontrada! Id: " + id + ", Tipo: " + Categoria.class.getName()));
     }
 
+    public Categoria insert(Categoria categoria) {
+        categoria.setId(null);
+        return repo.save(categoria);
+    }
 }
