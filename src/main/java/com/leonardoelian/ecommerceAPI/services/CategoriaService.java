@@ -1,9 +1,11 @@
 package com.leonardoelian.ecommerceAPI.services;
 
 import com.leonardoelian.ecommerceAPI.domain.Categoria;
+import com.leonardoelian.ecommerceAPI.dto.CategoriaDTO;
 import com.leonardoelian.ecommerceAPI.repositories.CategoriaRepository;
 import com.leonardoelian.ecommerceAPI.services.exceptions.DataIntegrityException;
 import com.leonardoelian.ecommerceAPI.services.exceptions.ObjectNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -54,5 +56,18 @@ public class CategoriaService {
     public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         return repo.findAll(pageRequest);
+    }
+
+    public Categoria fromDTO(CategoriaDTO objDto) {
+        return new Categoria(objDto.getId(), objDto.getNome());
+    }
+
+    public void validateDTO(CategoriaDTO categoriaDTO) {
+        if(categoriaDTO.getNome() == "") {
+            throw new DataIntegrityException("Preenchimento obrigatório");
+        }
+        else if(categoriaDTO.getNome().length() < 5) {
+            throw new DataIntegrityException("O tamanho deve ser entre 5 e 80 caracteres");
+        }
     }
 }
