@@ -1,7 +1,5 @@
 package com.leonardoelian.ecommerceAPI.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -63,5 +61,15 @@ public class Cidade implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Cidade{");
+        sb.append("id=").append(id);
+        sb.append(", nome='").append(nome).append('\'');
+        sb.append(", estado=").append(estado);
+        sb.append('}');
+        return sb.toString();
     }
 }

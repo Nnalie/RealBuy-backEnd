@@ -1,7 +1,10 @@
 package com.leonardoelian.ecommerceAPI.resources;
 
+import com.leonardoelian.ecommerceAPI.domain.Categoria;
 import com.leonardoelian.ecommerceAPI.domain.Cliente;
 import com.leonardoelian.ecommerceAPI.domain.Cliente;
+import com.leonardoelian.ecommerceAPI.dto.CategoriaDTO;
+import com.leonardoelian.ecommerceAPI.dto.ClienteAuxDTO;
 import com.leonardoelian.ecommerceAPI.dto.ClienteDTO;
 import com.leonardoelian.ecommerceAPI.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,9 +53,8 @@ public class ClienteResource {
     }
 
     @PostMapping
-    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO objDto) {
-        service.validateDTO(objDto);
-        Cliente obj = service.fromDTO(objDto);
+    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteAuxDTO clienteAuxDTO) {
+        Cliente obj = service.fromDTO(clienteAuxDTO);
         obj = service.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(obj.getId()).toUri();

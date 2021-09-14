@@ -1,6 +1,5 @@
 package com.leonardoelian.ecommerceAPI.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -119,5 +118,20 @@ public class Endereco implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Endereco{");
+        sb.append("id=").append(id);
+        sb.append(", logradouro='").append(logradouro).append('\'');
+        sb.append(", numero='").append(numero).append('\'');
+        sb.append(", complemento='").append(complemento).append('\'');
+        sb.append(", bairro='").append(bairro).append('\'');
+        sb.append(", cep='").append(cep).append('\'');
+        sb.append(", cliente=").append(cliente);
+        sb.append(", cidade=").append(cidade);
+        sb.append('}');
+        return sb.toString();
     }
 }

@@ -1,8 +1,14 @@
 package com.leonardoelian.ecommerceAPI.services;
 
+import com.leonardoelian.ecommerceAPI.domain.Cidade;
 import com.leonardoelian.ecommerceAPI.domain.Cliente;
+import com.leonardoelian.ecommerceAPI.domain.Endereco;
+import com.leonardoelian.ecommerceAPI.domain.enums.TipoCliente;
+import com.leonardoelian.ecommerceAPI.dto.ClienteAuxDTO;
 import com.leonardoelian.ecommerceAPI.dto.ClienteDTO;
+import com.leonardoelian.ecommerceAPI.repositories.CidadeRepository;
 import com.leonardoelian.ecommerceAPI.repositories.ClienteRepository;
+import com.leonardoelian.ecommerceAPI.repositories.EnderecoRepository;
 import com.leonardoelian.ecommerceAPI.services.exceptions.DataIntegrityException;
 import com.leonardoelian.ecommerceAPI.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +18,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +27,12 @@ public class ClienteService {
 
     @Autowired
     private ClienteRepository repo;
+
+    @Autowired
+    private EnderecoRepository repoEnd;
+
+    @Autowired
+    private CidadeRepository repoCid;
 
     public List<Cliente> findAll() {
         List<Cliente> obj = repo.findAll();
@@ -32,9 +45,12 @@ public class ClienteService {
                 "Cliente não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
     }
 
+    @Transactional
     public Cliente insert(Cliente cliente) {
         cliente.setId(null);
-        return repo.save(cliente);
+        cliente = repo.save(cliente);
+        repoEnd.saveAll(cliente.getEnderecos());
+        return cliente;
     }
 
     public Cliente update(Cliente cliente) {
@@ -65,6 +81,23 @@ public class ClienteService {
 
     public Cliente fromDTO(ClienteDTO objDto) {
         return new Cliente(objDto.getId(), objDto.getNome(), objDto.getEmail(), null, null);
+    }
+
+    public Cliente fromDTO(ClienteAuxDTO objDto) {
+       Cliente cliente = new Cliente(null, objDto.getNome(), objDto.getEmail(), objDto.getCpfOuCnpj(), TipoCliente.toEnum(objDto.getTipoCliente()));
+       Cidade cid = new Cidade(objDto.getCidadeId(), null, null);
+       Endereco endereco = new Endereco(null, objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(), objDto.getCep(), cliente, cid);
+
+       cliente.getEnderecos().add(endereco);
+       cliente.getTelefones().add(objDto.getTelefone_1());
+       if(objDto.getTelefone_2() != null) {
+           cliente.getTelefones().add(objDto.getTelefone_2());
+       }
+       if(objDto.getTelefone_3() != null) {
+           cliente.getTelefones().add(objDto.getTelefone_3());
+       }
+       System.out.println(objDto);
+       return cliente;
     }
 
     public void validateDTO(ClienteDTO clienteDTO) {

@@ -1,8 +1,6 @@
 package com.leonardoelian.ecommerceAPI.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.leonardoelian.ecommerceAPI.domain.enums.TipoCliente;
 
 import javax.persistence.*;
