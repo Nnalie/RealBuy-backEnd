@@ -1,13 +1,21 @@
 package com.leonardoelian.ecommerceAPI.dto;
 
-import java.io.Serializable;
+import com.leonardoelian.ecommerceAPI.services.validation.ClienteInsert;
 
+import javax.validation.constraints.Email;
+import java.io.Serializable;
+import java.util.Objects;
+
+@ClienteInsert
 public class ClienteAuxDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     //Cliente
     private String nome;
+
+    @Email
     private String email;
+
     private String cpfOuCnpj;
     private Integer tipoCliente;
 
@@ -132,5 +140,16 @@ public class ClienteAuxDTO implements Serializable {
         this.cidadeId = cidade_id;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ClienteAuxDTO that = (ClienteAuxDTO) o;
+        return Objects.equals(tipoCliente, that.tipoCliente);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(tipoCliente);
+    }
 }

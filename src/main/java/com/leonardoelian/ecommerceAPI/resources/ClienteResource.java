@@ -54,6 +54,7 @@ public class ClienteResource {
 
     @PostMapping
     public ResponseEntity<Void> insert(@Valid @RequestBody ClienteAuxDTO clienteAuxDTO) {
+        service.validateDTO(clienteAuxDTO);
         Cliente obj = service.fromDTO(clienteAuxDTO);
         obj = service.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()

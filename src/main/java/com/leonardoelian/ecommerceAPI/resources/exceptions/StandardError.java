@@ -5,11 +5,15 @@ public class StandardError {
     private Integer status;
     private String msg;
     private Long timeStamp;
+    private String message;
+    private String path;
 
-    public StandardError(Integer status, String msg, Long timeStamp) {
+    public StandardError(Integer status, String msg, Long timeStamp, String message, String path) {
         this.status = status;
         this.msg = msg;
         this.timeStamp = timeStamp;
+        this.message = message;
+        this.path = path;
     }
 
     public Integer getStatus() {

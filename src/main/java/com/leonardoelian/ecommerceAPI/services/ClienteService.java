@@ -109,4 +109,15 @@ public class ClienteService {
         }
     }
 
+    public void validateDTO(ClienteAuxDTO cli) {
+        if(cli.getNome() == "" || cli.getEmail() == "" || cli.getCpfOuCnpj() == ""
+        || cli.getLogradouro() == "" || cli.getNumero() == "" || cli.getCep() == ""
+        || cli.getTelefone_1() == "") {
+            throw new DataIntegrityException("Preenchimento obrigatório dos campos");
+        }
+        else if(cli.getNome().length() < 5 && cli.getNome().length() > 120) {
+            throw new DataIntegrityException("O tamanho deve ser entre 5 e 120 caracteres");
+        }
+    }
+
 }
