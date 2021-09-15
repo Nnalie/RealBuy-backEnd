@@ -11,6 +11,7 @@ import com.leonardoelian.ecommerceAPI.repositories.ClienteRepository;
 import com.leonardoelian.ecommerceAPI.repositories.EnderecoRepository;
 import com.leonardoelian.ecommerceAPI.services.exceptions.DataIntegrityException;
 import com.leonardoelian.ecommerceAPI.services.exceptions.ObjectNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -105,7 +106,7 @@ public class ClienteService {
             throw new DataIntegrityException("Preenchimento obrigatório dos campos");
         }
         else if(clienteDTO.getNome().length() < 5 && clienteDTO.getNome().length() > 120) {
-            throw new DataIntegrityException("O tamanho deve ser entre 5 e 80 caracteres");
+            throw new DataIntegrityException("O tamanho deve ser entre 5 e 120 caracteres");
         }
     }
 
