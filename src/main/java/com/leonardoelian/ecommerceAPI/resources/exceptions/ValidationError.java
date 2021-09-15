@@ -1,6 +1,8 @@
 package com.leonardoelian.ecommerceAPI.resources.exceptions;
 
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ValidationError extends StandardError {
@@ -8,7 +10,7 @@ public class ValidationError extends StandardError {
 
     private List<FieldMessage> errors = new ArrayList<>();
 
-    public ValidationError(Long timestamp, Integer status, String error, String message, String path) {
+    public ValidationError(Date timestamp, Integer status, String error, String message, String path) {
         super(status, error, timestamp, message, path);
     }
 

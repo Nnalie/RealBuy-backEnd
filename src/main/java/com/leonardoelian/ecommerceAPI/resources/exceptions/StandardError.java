@@ -1,14 +1,16 @@
 package com.leonardoelian.ecommerceAPI.resources.exceptions;
 
+import java.util.Date;
+
 public class StandardError {
 
     private Integer status;
     private String msg;
-    private Long timeStamp;
+    private Date timeStamp;
     private String message;
     private String path;
 
-    public StandardError(Integer status, String msg, Long timeStamp, String message, String path) {
+    public StandardError(Integer status, String msg, Date timeStamp, String message, String path) {
         this.status = status;
         this.msg = msg;
         this.timeStamp = timeStamp;
@@ -32,11 +34,11 @@ public class StandardError {
         this.msg = msg;
     }
 
-    public Long getTimeStamp() {
+    public Date getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(Long timeStamp) {
+    public void setTimeStamp(Date timeStamp) {
         this.timeStamp = timeStamp;
     }
 }

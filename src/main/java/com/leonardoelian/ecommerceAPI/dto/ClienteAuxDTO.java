@@ -13,7 +13,7 @@ public class ClienteAuxDTO implements Serializable {
     //Cliente
     private String nome;
 
-    @Email
+    @Email(message = "Email inválido")
     private String email;
 
     private String cpfOuCnpj;

@@ -56,8 +56,15 @@ public class ClienteService {
 
     public Cliente update(Cliente cliente) {
         Cliente newCli = findById(cliente.getId());
+
         updateData(newCli, cliente);
-        return repo.save(newCli);
+
+        try {
+            return repo.save(newCli);
+        }
+        catch(DataIntegrityViolationException e) {
+            throw new DataIntegrityException("O email informado é de outro usuário");
+        }
     }
 
     private void updateData(Cliente newCli, Cliente cliente) {
