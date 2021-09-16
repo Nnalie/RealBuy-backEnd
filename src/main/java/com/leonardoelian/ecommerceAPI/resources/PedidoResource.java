@@ -1,8 +1,6 @@
 package com.leonardoelian.ecommerceAPI.resources;
 
-import com.leonardoelian.ecommerceAPI.domain.Categoria;
 import com.leonardoelian.ecommerceAPI.domain.Pedido;
-import com.leonardoelian.ecommerceAPI.dto.CategoriaDTO;
 import com.leonardoelian.ecommerceAPI.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
